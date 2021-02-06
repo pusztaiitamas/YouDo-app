@@ -1,9 +1,11 @@
 const formElement = document.getElementById("form_element");
 const ulElement = document.getElementById("youdo_list");
 const createYouDoText = document.getElementById("youdo_text");
-
-createYouDoText.setAttribute("required", "");
+const createButton = document.getElementById("youdo_button");
+createYouDoText.setAttribute("required", "true");
 createYouDoText.setAttribute("pattern", ".{6,}");
+createButton.setAttribute("disabled","true")
+
 console.log(createYouDoText);
 formElement.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -16,7 +18,7 @@ formElement.addEventListener("submit", function (event) {
     deleteButton.addEventListener("click", function (ev) {
         createYouDoText.parentNode.removeChild(newYouDo);
     })
-    checkValidity(createYouDoText)
+    checkValidity(createYouDoText);
 })
 
 function checkValidity(element) {
@@ -26,4 +28,14 @@ function checkValidity(element) {
         element.style.border = "3px solid green"
     }
         }
+
+createYouDoText.addEventListener("change", function (element){
+   if (createYouDoText.validity.valid === true){
+       createButton.disabled = false;
+   }else {
+       createButton.disabled = true;
+       createYouDoText.style.border = "3px solid red";
+   }
+
+})
 
